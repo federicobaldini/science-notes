@@ -1,5 +1,133 @@
 \documentclass{article}
 
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{mdframed}
+\usetikzlibrary{quotes,angles}
+
+\makeindex
+%% no indentation for the entire file
+\setlength\parindent{0pt}
+
 \begin{document}
+
+\renewcommand{\contentsname}{Sommario}
+\tableofcontents
+
+\newpage
+
+\section{Introduzione}
+
+\newpage
+
+\section{Calcolo differenziale}
+
+\subsection{Storia}
+
+La derivata è uno dei concetti fondamentali della matematica e della fisica, e rappresenta la variazione istantanea di una funzione in un determinato punto, ed è stato introdotto per la prima volta nel XVII secolo da matematici come Isaac Newton e Gottfried Wilhelm von Leibniz.
+
+Newton e Leibniz sono stati i primi a sviluppare un metodo sistematico per il calcolo delle derivate, noto come calcolo differenziale. Questo metodo è stato originariamente ideato per risolvere problemi di meccanica e astronomia, ma il suo impiego si è esteso rapidamente ad altre aree della matematica e della fisica. Il calcolo differenziale ha permesso di formalizzare il concetto di derivata e di creare una nuova teoria matematica e fisica basata sulle equazioni differenziali, aprendo la strada a importanti sviluppi nella comprensione e nell'applicazione della matematica e della fisica moderna.
+
+\subsection{Calcolo delle derivate}
+
+Per calcolare la derivata di una funzione $f(x)$ in un punto $x$, si utilizza la formula del limite del rapporto incrementale:
+
+\[ f'(x) = \lim\limits_{h \to 0} \dfrac{f(x + h) - f(x)}{h} \tag{2.2.1}\label{eq:limite_del_rapporto_incrementale} \]
+
+Esso rappresenta il rapporto tra la variazione della funzione $f(x)$ e la variazione in ingresso $h$ quando quest'ultima si avvicina sempre più a zero. In questo caso l'obbiettivo è calcolare la variazione della funzione in un punto preciso, ma questo è reso impossibile dal fatto che la funzione è continua e varia in modo infinitesimale. Per ovviare a questo problema si utilizza il concetto di limite: si prendono due punti vicini al punto di interesse e si fa avvicinare sempre di più uno di questi punti all'altro, fino a quando la distanza tra i due punti si avvicina a zero. In questo modo, in riferimento al limite del rapporto incrementale, si ottiene la misura della pendenza della funzione in quel punto, ovvero la sua derivata.
+
+\vspace{\baselineskip}
+
+Per dare un esempio concreto di applicazione di questo concetto, supponiamo di avere la seguente funzione:
+
+\[ f(x) = x^3 - 3x^2 + 2x + 1 \]
+
+Per calcolare la sua derivata utilizziamo la sua definizione classica definita in precedenza (\ref{eq:limite_del_rapporto_incrementale}) e sostituiamo la nostra funzione nella formula del limite del rapporto incrementale e otteniamo:
+
+\[ f'(x) = \lim\limits_{h \to 0} \dfrac{(x + h)^3 - 3(x + h)^2 + 2(x + h) + 1 - (x^3 - 3x^2 + 2x + 1)}{h} \]
+
+Per espandere il polinomio a numeratore è necessario saper calcolare il cubo di un binomio e il quadrato di un binomio.
+
+\begin{mdframed}
+  \vspace{0.2cm}
+  \textbf{Binomio di Newton}
+
+  Per il calcolo di un binomio ad esponente arbitrario $n$ si utilizza la relativa formula di Newton:
+
+  \[ (a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k}b^k \tag{2.2.2}\label{eq:binomio_di_Newton} \]
+
+  Di seguito verrà data una breve spiegazione del significato del coefficiente binomiale $\binom{n}{k}$ senza scendere nei dettagli specifici della definizione di numero fattoriale, basti sapere che un numero fattoriale come $5!$ corrisponde a $1\cdot2\cdot3\cdot4\cdot5 = 120$ e dove $0! = 1$.
+
+  \vspace{\baselineskip}
+
+  \textbf{Coefficiente binomiale}
+  
+  Dati due numeri naturali $n, k$ si dice coefficiente binomiale di $n$ su $k$:
+
+  \[ 
+    \binom{n}{k} = 
+    \begin{cases}
+      \begin{aligned}
+        &\dfrac{n!}{k!(n-k)!} &&\quad n, k \in \mathbb{N}, 0 \leq k \leq n \\\\
+        &0 &&\quad n, k \in \mathbb{N}, 0 \leq n \leq k
+      \end{aligned}
+    \end{cases}
+    \tag{2.2.3}\label{eq:coefficiente_binomiale}
+  \]
+
+  possiamo quindi riscrivere il binomio di Newton in una forma più chiara:
+
+  \[ (a + b)^n = \sum_{k=0}^{n} \dfrac{n!}{k!(n-k)!} a^{n-k}b^k \]
+
+  \vspace{\baselineskip}
+
+  \textbf{Cubo di un binomio}
+
+  Il cubo di un binomio si calcola usando la formula del binomio di Newton per il cubo, dove $a$ e $b$ sono due numeri qualsiasi:
+
+  \[ (a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3 \tag{2.2.4}\label{eq:cubo_di_un_binomio} \]
+
+  \vspace{\baselineskip}
+
+  \textbf{Quadrato di un binomio}
+
+  Il quadrato di un binomio si calcola usando la formula del binomio di Newton per il quadrato, dove $a$ e $b$ sono due numeri qualsiasi:
+
+  \[ (a + b)^2 = a^2 + 2ab + b^2 \tag{2.2.5}\label{eq:quadrato_di_un_binomio} \]
+  \vspace{0.2cm}
+\end{mdframed}
+
+\newpage
+
+Utilizzando le formule \ref{eq:cubo_di_un_binomio} e \ref{eq:quadrato_di_un_binomio} è possibile espandere completamente il polinomio al numeratore e semplificando, otteniamo:
+
+\[ f'(x) = \lim\limits_{h \to 0} \dfrac{h^3 - 3h^2 + 3xh^2 + 3x^2h - 6xh + 2h}{h} \]
+
+Eliminando $h$ al denominatore e semplificando ulteriormente il polinomio, otteniamo la derivata:
+
+\[ f'(x) = 3x^2 - 6x + 2 \]
+
+\subsection{Velocità di cambiamento}
+
+Di seguito viene dato un esempio concettuale di utilizzo della derivata per calcolare la velocità di cambiamento di una funzione in un determinato istante: immagina di guidare un'auto su una strada e di registrare la tua posizione ogni secondo. Se la tua posizione è descritta da una funzione matematica $f(x)$, dove $x$ rappresenta il tempo in secondi, la derivata di questa funzione rappresenta la tua velocità istantanea in un certo momento, ovvero di quanto sta cambiando lo spazio percorso in quell'istante rispetto al tempo $x$.
+Ammettiamo ora che la tua posizione nello spazio in funzione del tempo è descritta dalla funzione:
+
+\[ f(x) = 5x^2 \]
+
+La sua funzione derivata è:
+
+\[ f'(x) = 10x \]
+
+Questo significa che la tua velocità istantanea in un certo momento è uguale a $10x\;m/s$. Quindi, se al secondo 5 la tua posizione è $f(5) = 125$ metri, la tua velocità istantanea in quel momento è $f'(5) = 50\;m/s$.
+
+Il che indica che stai guidando a 50 metri al secondo, o circa $180\; km/h$. In questo esempio, la derivata ci ha permesso di calcolare la velocità istantanea di un'auto in un certo momento, utilizzando la funzione che descrive la sua posizione nel tempo.
+
+\newpage
+
+\section{Conclusioni}
 
 \end{document}
